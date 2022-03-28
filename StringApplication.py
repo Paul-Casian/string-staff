@@ -116,13 +116,13 @@ daily_transactions = daily_sales_replaced.split(",")
 daily_transactions_split = []
 for item in daily_transactions:
     daily_transactions_split.append(item.split(";"))
-    #print(daily_transactions_split)
+#print(daily_transactions_split)
 transactions_clean = []
 for transaction in daily_transactions_split:
     transaction_clean = []
     for data_point in transaction:
         transaction_clean.append(data_point.replace("\n","").strip(" "))
-        transactions_clean.append(transaction_clean)
+    transactions_clean.append(transaction_clean)
 #print(transactions_clean)
 
 customers = []
@@ -140,4 +140,26 @@ for transaction in sales:
     total_sales += float(transaction.strip("$"))
 print(total_sales)
 
+#print(thread_sold)
 thread_sold_split = []
+for sale in thread_sold:
+    for color in sale.split("&"):
+        thread_sold_split.append(color)
+
+#print(thread_sold_split)
+
+def color_count(color):
+    contor = 0
+    for element in thread_sold_split:
+        if element == color:
+            contor += 1
+    return contor
+print(color_count('white'))
+
+colors = ['red','yellow','green','white','black','blue','purple']
+
+for color in colors:
+    print(
+     "Threads from the color {0} where sold in number of {1}"
+     .format(color,color_count(color))
+    )   
